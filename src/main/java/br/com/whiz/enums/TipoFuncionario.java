@@ -2,38 +2,37 @@ package br.com.whiz.enums;
 
 public enum TipoFuncionario {
 
-    VENDEDOR(1, "Vendedor"),
-    GERENTE(2, "Gerente");
+    GERENTE(1, "Gerente"),
+    VENDEDOR(2, "Vendedor");
 
-    private final int cod;
-    private final String funcao;
+    private final Integer cod;
+    private final String cargo;
 
-    TipoFuncionario(int cod, String funcao) {
+    TipoFuncionario(Integer cod, String descricao) {
         this.cod = cod;
-        this.funcao = funcao;
+        this.cargo = descricao;
     }
 
-    public int getCod() {
+    public Integer getCod() {
         return cod;
     }
 
-    public String getFuncao() {
-        return funcao;
+    public String getCargo() {
+        return cargo;
     }
 
     public static TipoFuncionario toEnum(Integer cod){
-        if(cod == null){
+        if (cod == null) {
             return null;
         }
 
-        for (TipoFuncionario tf : TipoFuncionario.values()){
-            if (cod.equals(tf.getCod())){
-                return tf;
+        for (TipoFuncionario tipoFuncionario: TipoFuncionario.values()){
+            if (cod.equals(tipoFuncionario.getCod())){
+                return tipoFuncionario;
             }
         }
 
-        throw new IllegalArgumentException("value is not valid" + cod);
-
+        throw new IllegalArgumentException("Value is not invalid! "+ cod);
     }
-
 }
+

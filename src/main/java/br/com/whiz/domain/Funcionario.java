@@ -2,13 +2,16 @@ package br.com.whiz.domain;
 
 import br.com.whiz.enums.TipoFuncionario;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.*;
 
 @Entity
-public class Funcionario implements Serializable {
+@Inheritance(strategy = InheritanceType.JOINED)
+@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, property = "@type")
+public class Funcionario implements Serializable{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -17,17 +20,16 @@ public class Funcionario implements Serializable {
 
     @JsonFormat(pattern = "yyyy/MM/dd")
     private Date nascimento;
+    private Integer tipoFuncionario;
     private String cpf;
 
     @OneToMany(mappedBy = "funcionario")
     private List<Endereco> enderecos = new ArrayList<>();
 
-    private Integer tipoFuncionario;
-
     public Funcionario(){
     }
 
-    public Funcionario(Long id, String name, Date nascimento,TipoFuncionario tipoFuncionario, String cpf){
+    public Funcionario(Long id, String name, Date nascimento, TipoFuncionario tipoFuncionario, String cpf){
         this.id = id;
         this.name = name;
         this.nascimento = nascimento;
