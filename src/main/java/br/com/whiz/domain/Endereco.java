@@ -1,5 +1,7 @@
 package br.com.whiz.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Objects;
@@ -19,6 +21,7 @@ public class Endereco implements Serializable {
     @JoinColumn(name = "cidade_id")
     private Cidade cidade;
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "funcionario_id")
     private Funcionario funcionario;
@@ -26,13 +29,14 @@ public class Endereco implements Serializable {
     public Endereco() {
     }
 
-    public Endereco(Long id, String rua, Integer numero, String bairro, String cep, Cidade cidade) {
+    public Endereco(Long id, String rua, Integer numero, String bairro, String cep, Cidade cidade, Funcionario funcionario) {
         this.id = id;
         this.rua = rua;
         this.numero = numero;
         this.bairro = bairro;
         this.cep = cep;
         this.cidade = cidade;
+        this.funcionario = funcionario;
     }
 
     public Long getId() {
@@ -81,6 +85,14 @@ public class Endereco implements Serializable {
 
     public void setCidade(Cidade cidade) {
         this.cidade = cidade;
+    }
+
+    public Funcionario getFuncionario() {
+        return funcionario;
+    }
+
+    public void setFuncionario(Funcionario funcionario) {
+        this.funcionario = funcionario;
     }
 
     @Override

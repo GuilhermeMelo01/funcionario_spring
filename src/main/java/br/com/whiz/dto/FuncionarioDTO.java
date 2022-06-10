@@ -3,6 +3,7 @@ package br.com.whiz.dto;
 import br.com.whiz.domain.Endereco;
 import br.com.whiz.domain.Funcionario;
 import br.com.whiz.enums.TipoFuncionario;
+import com.sun.istack.NotNull;
 import org.apache.catalina.LifecycleState;
 
 import java.io.Serializable;
