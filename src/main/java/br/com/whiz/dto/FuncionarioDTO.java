@@ -1,19 +1,18 @@
 package br.com.whiz.dto;
 
-import br.com.whiz.domain.Endereco;
 import br.com.whiz.domain.Funcionario;
-import br.com.whiz.enums.TipoFuncionario;
 
+import javax.validation.constraints.NotEmpty;
 import java.io.Serializable;
-import java.util.List;
 
 
 public class FuncionarioDTO implements Serializable {
 
     private Long id;
+    @NotEmpty(message = "Preenchimento Obrigatorio")
     private String name;
+    @NotEmpty(message = "Preenchimento Obrigatorio")
     private String cpf;
-    private TipoFuncionario tipoFuncionario;
 
     public FuncionarioDTO() {
     }
@@ -22,7 +21,6 @@ public class FuncionarioDTO implements Serializable {
         id = funcionario.getId();
         name = funcionario.getName();
         cpf = funcionario.getCpf();
-        tipoFuncionario = funcionario.getTipoFuncionario();
     }
 
     public Long getId() {
@@ -48,13 +46,4 @@ public class FuncionarioDTO implements Serializable {
     public void setCpf(String cpf) {
         this.cpf = cpf;
     }
-
-    public TipoFuncionario getTipoFuncionario() {
-        return tipoFuncionario;
-    }
-
-    public void setTipoFuncionario(TipoFuncionario tipoFuncionario) {
-        this.tipoFuncionario = tipoFuncionario;
-    }
-
 }

@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import javax.validation.Valid;
 import java.net.URI;
 import java.util.List;
 
@@ -33,13 +34,22 @@ public class FuncionarioController {
     }
 
     @RequestMapping(method = RequestMethod.POST)
-        public ResponseEntity<Void> insert(@RequestBody FuncionarioNewDTO funcionarioNewDTO){
+        public ResponseEntity<Void> insert(@Valid @RequestBody FuncionarioNewDTO funcionarioNewDTO){
         Funcionario funcionario = funcionarioService.fromDto(funcionarioNewDTO);
         funcionario = funcionarioService.insert(funcionario);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
                 .path("/{id}").buildAndExpand(funcionario.getId()).toUri();
         return ResponseEntity.created(uri).build();
     }
+
+//    @RequestMapping(method = RequestMethod.POST)
+//    public ResponseEntity<Void> insert(@Valid @RequestBody FuncionarioDTO funcionarioDTO){
+//        Funcionario funcionario = funcionarioService.fromDto(funcionarioDTO);
+//        funcionario = funcionarioService.insert(funcionario);
+//        URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
+//                .path("/{id}").buildAndExpand(funcionario.getId()).toUri();
+//        return ResponseEntity.created(uri).build();
+//    }
 
 
 

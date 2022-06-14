@@ -1,28 +1,41 @@
 package br.com.whiz.dto;
 
+import br.com.whiz.service.validation.FuncionarioInsert;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import org.hibernate.validator.constraints.Length;
 
+import javax.validation.constraints.NotEmpty;
 import java.io.Serializable;
 import java.util.Date;
 
+@FuncionarioInsert
 public class FuncionarioNewDTO implements Serializable {
 
-
+    @NotEmpty(message = "The name field must not be empty")
+    @Length(min = 4,max = 100, message = "The length of the name must be between 4 and 100")
     private String name;
+
     @JsonFormat(pattern = "yyyy/MM/dd")
     private Date nascimento;
+
     private Integer tipoFuncionario;
+
+    @NotEmpty(message = "The cpf field must not be empty")
     private String cpf;
 
     private String rua;
+
     private Integer numero;
+
+    @NotEmpty(message = "The bairro field must not be empty")
     private String bairro;
+
+    @NotEmpty(message = "The cep field must not be empty")
     private String cep;
 
     private Long cidadeId;
 
     public FuncionarioNewDTO(){
-
     }
 
     public String getName() {

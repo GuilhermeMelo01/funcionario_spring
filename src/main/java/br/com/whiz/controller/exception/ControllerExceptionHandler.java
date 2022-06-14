@@ -16,11 +16,14 @@ public class ControllerExceptionHandler {
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<StandardError> methodArgumentNotValidException(MethodArgumentNotValidException manve,
                                                                          HttpServletRequest request) {
-        ValidationError error = new ValidationError(System.currentTimeMillis(), HttpStatus.CONFLICT.value(),
-                "Object already exists", manve.getMessage(), request.getRequestURI());
+
+        ValidationError error = new ValidationError(System.currentTimeMillis(), HttpStatus.BAD_REQUEST.value(),
+                "Validation error", manve.getMessage(), request.getRequestURI());
+
         for (FieldError fieldError : manve.getBindingResult().getFieldErrors()) {
             error.addError(fieldError.getField(), fieldError.getDefaultMessage());
         }
-        return ResponseEntity.status(HttpStatus.CONFLICT).body(error);
+
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(error);
     }
 }

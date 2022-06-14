@@ -37,9 +37,9 @@ public class DBService {
 
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
 
-        Funcionario f1 = new Funcionario(null, "Carlos", "794237492",sdf.parse("2000/09/21"), TipoFuncionario.VENDEDOR);
+        Funcionario f1 = new Funcionario(null, "Carlos", "63516052023",sdf.parse("2000/09/21"), TipoFuncionario.VENDEDOR);
 
-        Funcionario f2 = new Funcionario(null, "Marcos", "4820387354",sdf.parse("1988/02/11"), TipoFuncionario.GERENTE);
+        Funcionario f2 = new Funcionario(null, "Marcos", "76505676058",sdf.parse("1988/02/11"), TipoFuncionario.GERENTE);
 
         Estado est1 = new Estado(null, "Ceara", "CE");
         Estado est2 = new Estado(null, "Alagoas", "AL");
