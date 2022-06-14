@@ -29,12 +29,12 @@ public class Funcionario implements Serializable{
     public Funcionario(){
     }
 
-    public Funcionario(Long id, String name, Date nascimento, TipoFuncionario tipoFuncionario, String cpf){
+    public Funcionario(Long id, String name,String cpf, Date nascimento, TipoFuncionario tipoFuncionario){
         this.id = id;
         this.name = name;
+        this.cpf = cpf;
         this.nascimento = nascimento;
         this.tipoFuncionario = (tipoFuncionario == null) ? null : tipoFuncionario.getCod();
-        this.cpf = cpf;
     }
 
     public Long getId() {
