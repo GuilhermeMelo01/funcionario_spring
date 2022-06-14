@@ -7,6 +7,7 @@ import java.util.Date;
 
 public class FuncionarioNewDTO implements Serializable {
 
+
     private String name;
     @JsonFormat(pattern = "yyyy/MM/dd")
     private Date nascimento;

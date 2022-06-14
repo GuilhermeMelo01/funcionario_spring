@@ -1,26 +1,28 @@
 package br.com.whiz.dto;
 
+import br.com.whiz.domain.Endereco;
 import br.com.whiz.domain.Funcionario;
 import br.com.whiz.enums.TipoFuncionario;
 
 import java.io.Serializable;
+import java.util.List;
 
 
 public class FuncionarioDTO implements Serializable {
 
     private Long id;
     private String name;
-    private TipoFuncionario tipoFuncionario;
     private String cpf;
+    private TipoFuncionario tipoFuncionario;
 
-    public FuncionarioDTO(){
-
+    public FuncionarioDTO() {
     }
 
-    public FuncionarioDTO(Funcionario funcionario){
+    public FuncionarioDTO(Funcionario funcionario) {
         id = funcionario.getId();
         name = funcionario.getName();
         cpf = funcionario.getCpf();
+        tipoFuncionario = funcionario.getTipoFuncionario();
     }
 
     public Long getId() {
@@ -39,20 +41,20 @@ public class FuncionarioDTO implements Serializable {
         this.name = name;
     }
 
-    public TipoFuncionario getTipoFuncionario() {
-        return tipoFuncionario;
-    }
-
-    public void setTipoFuncionario(TipoFuncionario tipoFuncionario) {
-        this.tipoFuncionario = tipoFuncionario;
-    }
-
     public String getCpf() {
         return cpf;
     }
 
     public void setCpf(String cpf) {
         this.cpf = cpf;
+    }
+
+    public TipoFuncionario getTipoFuncionario() {
+        return tipoFuncionario;
+    }
+
+    public void setTipoFuncionario(TipoFuncionario tipoFuncionario) {
+        this.tipoFuncionario = tipoFuncionario;
     }
 
 }
