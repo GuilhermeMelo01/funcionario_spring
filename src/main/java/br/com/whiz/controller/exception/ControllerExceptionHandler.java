@@ -1,6 +1,7 @@
 package br.com.whiz.controller.exception;
 
 import br.com.whiz.service.exception.DataIntegrityException;
+import br.com.whiz.service.exception.ObjectNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
@@ -40,5 +41,13 @@ public class ControllerExceptionHandler {
         StandardError stde = new StandardError(System.currentTimeMillis(), HttpStatus.UNPROCESSABLE_ENTITY.value()
                 , "Validation CPF", ilse.getMessage(), request.getRequestURI());
         return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).body(stde);
+    }
+
+    @ExceptionHandler(ObjectNotFoundException.class)
+    public ResponseEntity<StandardError> objectNotFoundException(ObjectNotFoundException onfe, HttpServletRequest request) {
+
+        StandardError stde = new StandardError(System.currentTimeMillis(), HttpStatus.NOT_FOUND.value()
+                , "Object not found", onfe.getMessage(), request.getRequestURI());
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(stde);
     }
 }

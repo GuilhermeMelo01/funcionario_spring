@@ -8,6 +8,7 @@ import br.com.whiz.dto.FuncionarioNewDTO;
 import br.com.whiz.enums.TipoFuncionario;
 import br.com.whiz.repository.EnderecoRepository;
 import br.com.whiz.repository.FuncionarioRepository;
+import br.com.whiz.service.exception.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -28,7 +29,7 @@ public class FuncionarioService {
     }
 
     public Funcionario findById(long id) {
-        return funcionarioRepository.findById(id).orElseThrow();
+        return funcionarioRepository.findById(id).orElseThrow(() -> new ObjectNotFoundException("Object not found!"));
     }
 
     @Transactional
@@ -37,6 +38,20 @@ public class FuncionarioService {
         enderecoRepository.saveAll(funcionario.getEnderecos());
         return funcionario;
 
+    }
+
+    @Transactional
+    public void update(Funcionario funcionario) {
+        Funcionario newFuncionario = funcionarioRepository.findById(funcionario.getId())
+                .orElseThrow(() -> new ObjectNotFoundException("Object not found!"));
+        updateData(newFuncionario, funcionario);
+        funcionarioRepository.save(newFuncionario);
+    }
+
+
+    private void updateData(Funcionario newFuncionario, Funcionario funcionario) {
+        newFuncionario.setName(funcionario.getName());
+        newFuncionario.setCpf(funcionario.getCpf());
     }
 
     public Funcionario fromDto(FuncionarioDTO funcionarioDTO) {

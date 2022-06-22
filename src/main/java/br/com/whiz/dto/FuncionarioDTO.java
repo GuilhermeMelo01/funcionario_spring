@@ -1,10 +1,8 @@
 package br.com.whiz.dto;
-
 import br.com.whiz.domain.Funcionario;
 
 import javax.validation.constraints.NotEmpty;
 import java.io.Serializable;
-
 
 public class FuncionarioDTO implements Serializable {
 

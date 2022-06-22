@@ -27,7 +27,7 @@ public class FuncionarioController {
         return ResponseEntity.ok().body(funcionarioDTO);
     }
 
-    @RequestMapping(value = "{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public ResponseEntity<Funcionario> findById(@PathVariable long id){
         Funcionario funcionarioId = funcionarioService.findById(id);
         return ResponseEntity.ok().body(funcionarioId);
@@ -40,6 +40,14 @@ public class FuncionarioController {
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
                 .path("/{id}").buildAndExpand(funcionario.getId()).toUri();
         return ResponseEntity.created(uri).build();
+    }
+
+    @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
+    public ResponseEntity<Void> update(@Valid @PathVariable Long id, @RequestBody FuncionarioDTO funcionarioDTO){
+        Funcionario funcionario = funcionarioService.fromDto(funcionarioDTO);
+        funcionario.setId(id);
+        funcionarioService.update(funcionario);
+        return ResponseEntity.noContent().build();
     }
 
 //    @RequestMapping(method = RequestMethod.POST)
