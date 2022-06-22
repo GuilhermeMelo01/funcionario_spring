@@ -8,6 +8,7 @@ import br.com.whiz.dto.FuncionarioNewDTO;
 import br.com.whiz.enums.TipoFuncionario;
 import br.com.whiz.repository.EnderecoRepository;
 import br.com.whiz.repository.FuncionarioRepository;
+import br.com.whiz.service.exception.DataIntegrityViolationException;
 import br.com.whiz.service.exception.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -40,12 +41,16 @@ public class FuncionarioService {
 
     }
 
-    @Transactional
     public void update(Funcionario funcionario) {
-        Funcionario newFuncionario = funcionarioRepository.findById(funcionario.getId())
-                .orElseThrow(() -> new ObjectNotFoundException("Object not found!"));
+        Funcionario newFuncionario = employeeExists(funcionario);
         updateData(newFuncionario, funcionario);
         funcionarioRepository.save(newFuncionario);
+    }
+
+    public void deleteById(Long id) {
+        employeeExists(id);
+        funcionarioRepository.deleteById(id);
+
     }
 
 
@@ -68,5 +73,14 @@ public class FuncionarioService {
 
         funcionario.getEnderecos().add(endereco);
         return funcionario;
+    }
+
+    private void employeeExists(Long id) {
+        funcionarioRepository.findById(id).orElseThrow(() -> new ObjectNotFoundException("Object not found!"));
+    }
+
+    private Funcionario employeeExists(Funcionario funcionario) {
+        return funcionarioRepository.findById(funcionario.getId())
+                .orElseThrow(() -> new ObjectNotFoundException("Object not found!"));
     }
 }

@@ -9,8 +9,6 @@ import java.io.Serializable;
 import java.util.*;
 
 @Entity
-@Inheritance(strategy = InheritanceType.JOINED)
-@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, property = "@type")
 public class Funcionario implements Serializable{
 
     @Id
@@ -23,7 +21,8 @@ public class Funcionario implements Serializable{
     private Integer tipoFuncionario;
     private String cpf;
 
-    @OneToMany(mappedBy = "funcionario")
+    @OneToMany(mappedBy = "funcionario") //Permite a delecao de Funcionario com enderecos
+    //relacionados
     private List<Endereco> enderecos = new ArrayList<>();
 
     public Funcionario(){

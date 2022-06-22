@@ -2,6 +2,7 @@ package br.com.whiz.controller.exception;
 
 import br.com.whiz.service.exception.DataIntegrityException;
 import br.com.whiz.service.exception.ObjectNotFoundException;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
@@ -49,5 +50,13 @@ public class ControllerExceptionHandler {
         StandardError stde = new StandardError(System.currentTimeMillis(), HttpStatus.NOT_FOUND.value()
                 , "Object not found", onfe.getMessage(), request.getRequestURI());
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(stde);
+    }
+
+    @ExceptionHandler(DataIntegrityViolationException.class)
+    public ResponseEntity<StandardError> DataIntegrityViolationException(DataIntegrityViolationException dive, HttpServletRequest request) {
+
+        StandardError stde = new StandardError(System.currentTimeMillis(), HttpStatus.CONFLICT.value()
+                , "Data Integrity Violation", dive.getMessage(), request.getRequestURI());
+        return ResponseEntity.status(HttpStatus.CONFLICT).body(stde);
     }
 }
