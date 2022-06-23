@@ -21,7 +21,7 @@ public class Funcionario implements Serializable{
     private Integer tipoFuncionario;
     private String cpf;
 
-    @OneToMany(mappedBy = "funcionario", cascade = CascadeType.REMOVE, orphanRemoval = true)
+    @OneToMany(mappedBy = "funcionario", cascade = CascadeType.REMOVE)
     private List<Endereco> enderecos = new ArrayList<>();
 
     public Funcionario(){

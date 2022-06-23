@@ -1,4 +1,4 @@
-package br.com.whiz.controller.exception;
+package br.com.whiz.resources.exception;
 
 import br.com.whiz.service.exception.DataIntegrityException;
 import br.com.whiz.service.exception.ObjectNotFoundException;

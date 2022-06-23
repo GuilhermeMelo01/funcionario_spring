@@ -1,4 +1,4 @@
-package br.com.whiz.controller;
+package br.com.whiz.resources;
 
 import br.com.whiz.domain.Funcionario;
 import br.com.whiz.dto.FuncionarioDTO;
@@ -15,7 +15,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/funcionarios")
-public class FuncionarioController {
+public class FuncionarioResource {
 
     @Autowired
     private FuncionarioService funcionarioService;

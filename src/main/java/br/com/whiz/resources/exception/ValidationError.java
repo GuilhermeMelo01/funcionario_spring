@@ -1,4 +1,4 @@
-package br.com.whiz.controller.exception;
+package br.com.whiz.resources.exception;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,6 +1,6 @@
 package br.com.whiz.service.validation;
 
-import br.com.whiz.controller.exception.FieldMessage;
+import br.com.whiz.resources.exception.FieldMessage;
 import br.com.whiz.dto.FuncionarioNewDTO;
 import br.com.whiz.repository.FuncionarioRepository;
 import br.com.whiz.service.validation.utils.BR;
